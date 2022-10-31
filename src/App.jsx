@@ -1,4 +1,5 @@
-import { GiHamburgerMenu } from "react-icons/gi";
+import { Route, Routes } from "react-router-dom";
+
 import PostFeed from "./components/Posts/PostFeed";
 
 const DUMMY_POSTS = [
@@ -18,8 +19,9 @@ function App({ posts }) {
   return (
     <div className="flex flex-col justify-center items-center">
       <h1>Welcome to my blog!</h1>
-      <h1>{console.log(posts)}</h1>
-      <PostFeed posts={posts} />
+      <Routes>
+        <Route path="/" element={<PostFeed posts={posts} />} />
+      </Routes>
     </div>
   );
 }
