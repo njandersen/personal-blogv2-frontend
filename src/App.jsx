@@ -17,8 +17,7 @@ const DUMMY_POSTS = [
 
 function App({ posts }) {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h1>Welcome to my blog!</h1>
+    <div className="flex flex-col justify-center items-center mt-11">
       <Routes>
         <Route path="/" element={<PostFeed posts={posts} />} />
       </Routes>
