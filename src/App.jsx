@@ -15,11 +15,11 @@ const DUMMY_POSTS = [
   },
 ];
 
-function App({ posts }) {
+function App() {
   return (
     <div className="flex flex-col justify-center items-center mt-11">
       <Routes>
-        <Route path="/" element={<PostFeed posts={posts} />} />
+        <Route path="/" element={<PostFeed posts={DUMMY_POSTS} />} />
       </Routes>
     </div>
   );

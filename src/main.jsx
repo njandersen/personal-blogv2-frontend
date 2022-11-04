@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
       <Banner />
       <Navbar />
-      <App posts={DUMMY_POSTS} />
+      <App />
       <Routes>
         <Route path="/create" element={<CreatePost />} />
         <Route path="/about" element={<About />} />
