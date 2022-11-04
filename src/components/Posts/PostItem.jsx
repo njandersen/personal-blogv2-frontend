@@ -9,6 +9,11 @@ function PostItem({ post }) {
       </h2>
 
       <div className="items-center">
+        <p
+          dangerouslySetInnerHTML={{
+            __html: `${post.content.substring(0, 200)}...`,
+          }}
+        />
         <span>
           {wordCount} words. {minutesToRead} min read
         </span>
