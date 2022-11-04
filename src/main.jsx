@@ -9,6 +9,7 @@ import CreatePost from "./pages/CreatePost";
 import About from "./pages/About";
 import Enter from "./pages/Enter";
 import "./index.css";
+import Post from "./pages/Post";
 
 const DUMMY_POSTS = [
   {
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/create" element={<CreatePost />} />
         <Route path="/about" element={<About />} />
         <Route path="/enter" element={<Enter />} />
+        <Route path="/post/:pid" element={<Post />} />
       </Routes>
     </Router>
   </React.StrictMode>
