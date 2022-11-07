@@ -29,10 +29,6 @@ function PostFeed() {
     getPosts();
   }, []);
 
-  // return posts
-  //   ? posts.map((post) => <PostItem post={post} key={post.slug} />)
-  //   : null;
-
   return (
     <>
       <div>
@@ -42,8 +38,7 @@ function PostFeed() {
         )}
       </div>
 
-      {posts &&
-        posts.posts.map((post) => <PostItem post={post} key={post.id} />)}
+      {posts && posts.map((post) => <PostItem post={post} key={post.id} />)}
     </>
   );
 }
