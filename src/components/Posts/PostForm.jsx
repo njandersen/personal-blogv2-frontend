@@ -17,15 +17,15 @@ function PostForm({ defaultValues, postref, preview }) {
   return (
     <form
       onSubmit={handleSubmit(createPost)}
-      className="rounded-md flex felx-col justify-center items-center mt-2"
+      className="rounded-md flex flex-col justify-center items-center mt-2"
     >
       {preview && (
-        <div>
+        <div className="rounded bg-gray-100 w-5/6 shadow-lg">
           <ReactMarkdown>{watch("content")}</ReactMarkdown>
         </div>
       )}
 
-      <div className=" w-5/6 h-96">
+      <div className={`${preview ? "hidden" : "w-5/6 h-96"}`}>
         <h1 className="mb-6 text-2xl font-bold text-teal-500 ">
           Create A New Post
         </h1>

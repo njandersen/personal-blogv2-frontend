@@ -1,30 +1,50 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PostManager from "../components/Posts/PostManager";
 
-const DUMMY_POSTS = [
-  {
-    id: "first-post",
-    title: "My First Test Post",
-    content:
-      "This is just a dummy test post meant to test the post system. I am just typing words right now to get as close to 200 words as I can. Will I get there before I give up? The answer is no I will not. Goodbye. ",
-  },
-];
-
 function Post() {
-  const pid = useParams().pid;
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const identifiedPost = DUMMY_POSTS.find((p) => p.id === pid);
-  console.log(identifiedPost);
+  const postId = useParams().pid;
 
-  // if (!identifiedPost) {
-  //   return (
-  //     <div>
-  //       <h2>Could not find post</h2>
-  //     </div>
-  //   );
-  // }
+  useEffect(() => {
+    const getPost = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/feed/post/${postId}`
+        );
+        if (!response.ok) {
+          throw new Error(
+            `This is an HTTP error: The status is ${response.status}`
+          );
+        }
+        let post = await response.json();
+        setPost(post);
+        setError(null);
+      } catch (err) {
+        setError(err.message);
+        setPost(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getPost();
+  }, []);
 
-  return <PostManager />;
+  console.log(post);
+  return (
+    <>
+      <div>
+        {loading && <div>Loading please wait....</div>}
+        {error && (
+          <div>{`There is a problem fetching the post data - ${error}`}</div>
+        )}
+      </div>
+      <PostManager post={post} />
+    </>
+  );
 }
 
 export default Post;
