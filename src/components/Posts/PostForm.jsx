@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 function PostForm({ defaultValues, postref, preview }) {
   const { register, handleSubmit, reset, watch, formState } = useForm({
-    defaultValues: {},
+    defaultValues,
     mode: "onChange",
   });
 
