@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useForm } from "react-hook-form";
 
@@ -7,12 +8,30 @@ function PostForm({ defaultValues, postref, preview }) {
     mode: "onChange",
   });
 
+  // States
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [published, setPublished] = useState(false);
+  const authorId = 1;
+
   const { errors, isDirty, isValid } = formState;
 
-  function createPost(event) {
-    event.preventDefault();
-    console.log(formState.inputs);
-  }
+  const createPost = async (data) => {
+    try {
+      await fetch("http://localhost:3000/feed/post", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: data.title,
+          content: data.content,
+          published: data.published,
+          authorId: 1,
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <form
@@ -38,9 +57,11 @@ function PostForm({ defaultValues, postref, preview }) {
           })}
           placeholder="A New Post"
           className="border-2 border-black w-full mb-6 rounded-lg bg-gray-100"
+          onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
           className="w-full h-full border-2 border-black bg-gray-100 p-3 rounded-lg"
+          onChange={(e) => setContent(e.target.value)}
           name="content"
           {...register("content", {
             required: "Content is required",
@@ -57,6 +78,7 @@ function PostForm({ defaultValues, postref, preview }) {
             className="mt-4"
             name="published"
             type="checkbox"
+            onChange={(e) => setPublished(e.target.value)}
             {...register("published")}
           />
           <label>Published</label>
